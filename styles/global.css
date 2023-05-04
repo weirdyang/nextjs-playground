@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 .box {
-    width: 10rem;
-    height: 10rem;
-    background-color: rebeccapurple;
-    border-radius: 0.75rem;
+  width: 10rem;
+  height: 10rem;
+  background-color: rebeccapurple;
+  border-radius: 0.75rem;
 }
