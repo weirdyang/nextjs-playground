@@ -7,11 +7,13 @@ interface NavBar {
   children?: ReactNode
 }
 
-const NavBar: FC<NavBar> = ({ children }) => {
+const NavBar = ({ children, className="" }) => {
   return (
     <header
-      className="w-full px-32 py-8 font-medium
-        flex items-center justify-between"
+      className={`w-full px-32 py-8 font-medium bg-inherit
+        z-50
+        sticky top-0
+        flex items-center justify-between ${className}`}
     >
       <nav>{children}</nav>
       <div className="absolute left-[50%] top-2 translate-x-">

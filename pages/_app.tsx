@@ -19,7 +19,7 @@ export default function MyApp({ Component, pageProps }) {
       </Head>
 
       <main
-        className={`${inter.variable} font-sans bg-neutral-100 w-full min-h-screen`}
+        className={`${inter.variable} font-sans bg-neutral-100 w-full min-h-screen flex flex-col`}
       >
         <NavBar>
           <CustomLink href={'/framer/box'} title={'box'} />
