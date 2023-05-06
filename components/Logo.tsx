@@ -8,7 +8,8 @@ function Logo() {
       <MotionLink
         href={'/'}
         className={
-          'w-auto p-2 h-16 bg-slate-900 text-white flex items-center justify-center rounded-xl text-2xl font-bold opacity-95'
+          `w-auto p-2 h-16 bg-slate-900 text-white flex items-center justify-center rounded-xl text-2xl font-bold opacity-95
+          dark:text-slate-700 dark:bg-zinc-400`
         }
         whileHover={{
           backgroundColor: 'slategray',
@@ -19,7 +20,7 @@ function Logo() {
       >
         alterwyx
       </MotionLink>
-    </motion.div>
+    </motion.div >
   )
 }
 

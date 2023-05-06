@@ -70,7 +70,8 @@ export default function IndexPage() {
         <title>yo</title>
         <meta name="description" content="uh.." />
       </Head>
-      <main className={'flex items-start w-full min-h-screen text-slate-900'}>
+      <main className={`flex items-start w-full min-h-screen text-slate-900
+      dark:text-zinc-300`}>
         <Layout className="pt-0">
           <div className="md:!flex-row flex items-stretch justify-between w-full flex-col gap-4">
             <div className={'w-full md:w-1/2 flex items-start flex-col'}>

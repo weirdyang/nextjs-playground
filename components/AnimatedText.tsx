@@ -33,7 +33,8 @@ function AnimatedText({ text, className = '' }) {
         variants={variants}
         initial="initial"
         animate="animate"
-        className={`inline-block w-full text-slate-950 font-bold capitalize text-8xl ${className}`}
+        className={`inline-block w-full text-slate-950 font-bold capitalize text-8xl ${className}
+        dark:text-zinc-200`}
       >
         {text.split(' ').map((word, index) => (
           <motion.span

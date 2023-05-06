@@ -2,12 +2,13 @@ import { motion } from 'framer-motion'
 import { FC, ReactNode } from 'react'
 import Logo from './Logo'
 import TwitterIcon from './Social/Twitter'
+import ThemeButton from './ThemeButton'
 
 interface NavBar {
   children?: ReactNode
 }
 
-const NavBar = ({ children, className="" }) => {
+const NavBar = ({ children, className = "" }) => {
   return (
     <header
       className={`w-full px-32 py-8 font-medium bg-inherit
@@ -17,7 +18,7 @@ const NavBar = ({ children, className="" }) => {
     >
       <nav>{children}</nav>
       <div className="absolute left-[50%] top-2 translate-x-">
-        <Logo></Logo>
+
       </div>
       <nav className="flex items-center flex-wrap justify-center">
         <motion.a
@@ -29,6 +30,7 @@ const NavBar = ({ children, className="" }) => {
         >
           <TwitterIcon className={''}></TwitterIcon>
         </motion.a>
+        <ThemeButton />
       </nav>
     </header>
   )
