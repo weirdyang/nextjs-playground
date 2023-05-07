@@ -26,7 +26,7 @@ const boxAnimation = {
   },
 }
 
-const box: FC = () => {
+const Box: FC = () => {
   const [isShown, setIsShown] = useState(true)
 
   const onClick = () => {
@@ -34,7 +34,7 @@ const box: FC = () => {
   }
 
   return (
-    <Layout>
+    <Layout className={`grid place-items-center`}>
       <button onClick={onClick}>{isShown ? 'Hide' : 'Show'}</button>
 
       <AnimatePresence>
@@ -44,4 +44,4 @@ const box: FC = () => {
   )
 }
 
-export default box
+export default Box

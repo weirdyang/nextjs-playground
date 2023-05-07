@@ -30,7 +30,7 @@ const NavBar = ({ children, className = "" }) => {
         >
           <TwitterIcon className={''}></TwitterIcon>
         </motion.a>
-        <ThemeButton />
+
       </nav>
     </header>
   )

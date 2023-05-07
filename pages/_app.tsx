@@ -4,6 +4,7 @@ import Head from 'next/head'
 import NavBar from '../components/NavBar'
 import CustomLink from '../components/CustomLink'
 import { ThemeProvider } from 'next-themes'
+import ResponsiveNavbar from '../components/ResponsiveNavbar'
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -22,9 +23,10 @@ export default function MyApp({ Component, pageProps }) {
         dark:bg-slate-900 dark:text-zinc-300
         duration-500 ease-in-out transition-colors`}
       >
-        <NavBar>
+        <ResponsiveNavbar>
           <CustomLink href={'/framer/box'} title={'box'} />
-        </NavBar>
+        </ResponsiveNavbar>
+
         <Component {...pageProps} />
       </main>
     </ThemeProvider>

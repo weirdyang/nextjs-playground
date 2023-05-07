@@ -11,9 +11,12 @@ function CustomLink({ href, title, className = '' }) {
       {title}
       <span
         className={`
-            h-[1px] inline-block  bg-slate-950 
-            absolute left-0 -bottom-0.5 
+            h-[1px] block  bg-slate-950
+            dark:bg-zinc-200
+            absolute left-0 -bottom-0.5
             group-hover:w-full transition-[width] ease duration-300
+            mt-4
+            lg:mt-0 lg:inline-block
             ${width}`}
       >
         &nbsp;
