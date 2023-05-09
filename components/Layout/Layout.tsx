@@ -8,9 +8,7 @@ interface Layout {
 
 const Layout = ({ children, className = '' }) => {
   return (
-    <div
-      className={`${className} w-full h-full inline-block z-0 md:p-16 p-8`}
-    >
+    <div className={`${className} w-full h-full z-0 md:p-16 p-8`}>
       {children}
     </div>
   )

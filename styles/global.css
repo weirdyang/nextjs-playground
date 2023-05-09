@@ -8,3 +8,7 @@
   background-color: rebeccapurple;
   border-radius: 0.75rem;
 }
+
+.tab svg {
+  fill: black;
+}
