@@ -44,7 +44,11 @@ function ResponsiveNavbar({ children }) {
             isShown ? 'block' : 'hidden'
           }`}
         >
-          <div className="w-full block absolute sm:relative z-50 flex-grow lg:flex-grow lg:flex lg:flex-row lg:items-start">
+          <div
+            className="w-full max-w-[400px]
+          sm:max-w-screen-2xl
+          block absolute sm:relative z-50 flex-grow lg:flex-grow lg:flex lg:flex-row lg:items-start"
+          >
             {children}
           </div>
           <div className="lg:inline-block hidden">

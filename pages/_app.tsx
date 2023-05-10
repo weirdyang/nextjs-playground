@@ -12,7 +12,7 @@ const inter = Inter({
 
 export default function MyApp({ Component, pageProps }) {
   return (
-    <ThemeProvider attribute='class'>
+    <ThemeProvider attribute="class">
       <Head>
         <meta name="viewport" content="width-device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -23,9 +23,13 @@ export default function MyApp({ Component, pageProps }) {
         dark:bg-slate-900 dark:text-zinc-300
         duration-500 ease-in-out transition-colors`}
       >
-        <ResponsiveNavbar>
-          <CustomLink href={'/framer/box'} title={'box'} />
-        </ResponsiveNavbar>
+        <NavBar>
+          <CustomLink
+            href={'/framer/box'}
+            title={'box'}
+            className="sm:inline-block !block max-w-[400px]"
+          />
+        </NavBar>
 
         <Component {...pageProps} />
       </main>

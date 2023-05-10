@@ -7,7 +7,7 @@ const House = ({ fill = 'none', className = '', ...props }) => (
       height={14}
       fill={fill}
       viewBox="0 0 16 16"
-      className={`${className} w-full h-auto`}
+      className={`${className}`}
       {...props}
     >
       <path d="M8.174 3.165a.25.25 0 0 0-.346 0L2.075 8.661a.25.25 0 0 0-.077.18L1.997 14a1 1 0 0 0 1 1H6a.5.5 0 0 0 .5-.5v-4.25a.25.25 0 0 1 .25-.25h2.5a.25.25 0 0 1 .25.25v4.25a.5.5 0 0 0 .5.5h3.002a1 1 0 0 0 1-1V8.842a.25.25 0 0 0-.077-.181L8.174 3.165Z" />

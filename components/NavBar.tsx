@@ -8,17 +8,18 @@ interface NavBar {
   children?: ReactNode
 }
 
-const NavBar = ({ children, className = "" }) => {
+const NavBar = ({ children, className = '' }) => {
   return (
     <header
-      className={`w-full px-32 py-8 font-medium bg-inherit
+      className={`w-full px-4 lg:px-32 md:px-24 py-8 font-medium bg-inherit
         z-50
         sticky top-0
         flex items-center justify-between ${className}`}
     >
       <nav>{children}</nav>
-      <div className="absolute left-[50%] top-2 translate-x-">
-
+      <div className="absolute left-[50%] top-2 translate-x-"></div>
+      <div className="inline-block">
+        <ThemeButton />
       </div>
       <nav className="flex items-center flex-wrap justify-center">
         <motion.a
@@ -30,7 +31,6 @@ const NavBar = ({ children, className = "" }) => {
         >
           <TwitterIcon className={''}></TwitterIcon>
         </motion.a>
-
       </nav>
     </header>
   )

@@ -5,8 +5,8 @@ import House from '../../components/Icons/House'
 import Bag from '../../components/Icons/Bag'
 import Calendar from '../../components/Icons/Calendar'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from 'react'
-import { FaCalendarAlt, FaHotel, FaPlane, FaShoppingBag } from 'react-icons/fa'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import profile from '../../images/profile.png'
 const svgStyle = {
@@ -123,9 +123,23 @@ function ListItem({ tab, onTabClick, index, activeIndex = 0 }) {
   )
 }
 function TabsPage() {
+  const { asPath } = useRouter()
+  let hash = tabs[0].id
+  useEffect(() => {
+    hash = asPath.split('#')[1]
+    const index = tabs.findIndex((el) => el.id === hash)
+    setActiveTabIndex(() => (index === -1 ? 0 : index))
+    setImage(() => (index === -1 ? tabs[0].keyWords : tabs[index].keyWords))
+  }, [asPath])
   const [activeTabIndex, setActiveTabIndex] = useState(0)
-  const [photo, setImage] = useState(tabs[0].id)
+  const [photo, setImage] = useState(tabs[0].keyWords)
+  const [sources, setSources] = useState([])
 
+  function getRandomImage(index) {
+    return `https://source.unsplash.com/random/900x700/?${photo}&${index}&t=${Math.floor(
+      Math.random() * (4 - 1 + 1) + 1,
+    )}`
+  }
   function onTabClick(index) {
     setActiveTabIndex(index)
     setImage(() => tabs[index].keyWords)
@@ -158,10 +172,10 @@ function TabsPage() {
           </AnimatePresence>
           <section className=" h-auto flex flex-row flex-wrap">
             {new Array(4).fill(0).map((_, index) => (
-              <div className="w-1/2 p-0 sm:p-1 rounded-md">
+              <div className="w-1/2 p-0 sm:p-1 rounded-md" key={index}>
                 <Image
-                  key={index}
-                  src={`https://source.unsplash.com/random/900x700/?${photo}&${tabs[index].id}`}
+                  loader={() => getRandomImage(index)}
+                  src={profile}
                   width={900}
                   height={700}
                   alt="yo"
