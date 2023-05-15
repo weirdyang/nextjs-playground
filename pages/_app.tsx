@@ -20,7 +20,7 @@ export default function MyApp({ Component, pageProps }) {
 
       <main
         className={`${inter.variable} font-sans bg-neutral-100 w-full min-h-screen
-        dark:bg-slate-900 dark:text-zinc-300
+        dark:bg-slate-900 dark:text-zinc-200
         duration-500 ease-in-out transition-colors`}
       >
         <NavBar>
