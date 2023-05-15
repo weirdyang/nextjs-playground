@@ -22,16 +22,16 @@ function Card({
     initial: { rotateY: 180, color: 'rgba(0, 0, 0, 0.0)' },
     animate: {
       rotateY: 0,
-      perspectiveY: 700,
+      perspectiveY: 0,
       color: 'rgba(255, 255, 255, 1)',
       transition: {
-        ease: 'easeIn',
+        ease: 'easeInOut',
         duration: 1,
       },
     },
     flip: {
       rotateY: [0, 90, 180],
-      perspectiveY: 700,
+      perspectiveY: 0,
       transition: {
         type: 'spring',
         stiffness: 100,
@@ -41,7 +41,7 @@ function Card({
   console.log('reveal', revealed, 'last', lastRevealed)
   const animation =
     revealed === index ? 'animate' : lastRevealed === index ? 'flip' : ''
-  const side = Math.random() < 0.5 ? 'meaning_up' : 'meaning_rev'
+
   return (
     <AnimatePresence>
       <motion.article
@@ -52,24 +52,25 @@ function Card({
         animate={animation}
         layout
         key={`${item.name_short}-${index}`}
-        className={`${className} w-full 
+        className={`${className} 
     border 
   border-slate-950 rounded-md
   dark:border-neutral-100
-   h-full
    grid
    place-items-center
-   min-h-[350px] min-w-[325px]
+   h-[350px] w-[325px]
    p-4
    text-base
-   transition-colors
-   duration-500
    bg-slate-700
   `}
       >
-        <div className="h-full flex flex-col  align-middle">
+        <div
+          className={`${
+            revealed === index ? 'flex' : 'hidden'
+          } h-full flex-col`}
+        >
           <h1 className="mb-2">{item['name']}</h1>
-          <p>{item[side]}</p>
+          <p>{item['meaning_up']}</p>
           <p className="mt-auto"></p>
         </div>
       </motion.article>
@@ -79,12 +80,14 @@ function Card({
 function TarotPage() {
   const [revealed, setRevealed] = useState(-1)
   const [lastRevealed, setLastRevealed] = useState(-1)
+  const [cards, setCards] = useState([])
+  const [selected, setSelected] = useState([])
   function clickHandler(index) {
     setLastRevealed(() => revealed)
     console.log(revealed)
     setRevealed((revealed) => (revealed === index ? -1 : index))
   }
-
+  useEffect(() => setCards(() => altNaiveShuffle(tarot)), [])
   function getCards() {
     const selected = []
     while (selected.length < 4) {
@@ -96,7 +99,23 @@ function TarotPage() {
     }
     return selected
   }
-
+  function altNaiveShuffle({ cards }) {
+    let randomCard
+    let tempX
+    for (let index = cards.length - 1; index > -1; index -= 1) {
+      randomCard = Math.floor(Math.random() * cards.length)
+      tempX = cards[index]
+      cards[index] = cards[randomCard]
+      cards[randomCard] = tempX
+    }
+    return cards
+  }
+  function drawCard() {
+    if (selected.length >= 4) {
+      return
+    }
+    setSelected((selected) => [...selected, cards[selected.length]])
+  }
   return (
     <>
       <Head>
@@ -105,6 +124,7 @@ function TarotPage() {
       </Head>
       <Layout className={`grid place-items-center w-full`}>
         <section
+          onClick={drawCard}
           className={`
         max-w-sm p-4
         sm:max-w-full md:p-8 lg:p-16
@@ -120,16 +140,22 @@ function TarotPage() {
         `}
         >
           <LayoutGroup>
-            {getCards().map((card, index) => (
-              <Card
-                lastRevealed={lastRevealed}
-                revealed={revealed}
-                clickHandler={clickHandler}
-                index={index}
-                key={`${index}-${card.name_short}`}
-                item={card}
-              />
-            ))}
+            {selected.length === 0 && (
+              <div className="min-h-[350px] min-w-[325px] w-full flex-1">
+                Click to draw
+              </div>
+            )}
+            {selected.length > 0 &&
+              selected.map((card, index) => (
+                <Card
+                  lastRevealed={lastRevealed}
+                  revealed={revealed}
+                  clickHandler={clickHandler}
+                  index={index}
+                  key={`${index}-${card.name_short}`}
+                  item={card}
+                />
+              ))}
           </LayoutGroup>
         </section>
       </Layout>
