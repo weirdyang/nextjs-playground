@@ -45,7 +45,7 @@ function Card({
   return (
     <AnimatePresence>
       <motion.article
-        onClick={() => clickHandler(index)}
+        onClick={(ev) => clickHandler(ev, index)}
         {...cardProps}
         initial={'initial'}
         variants={animationProps}
@@ -59,6 +59,7 @@ function Card({
    grid
    place-items-center
    h-[350px] w-[325px]
+   md:w-[300px]
    p-4
    text-base
    bg-slate-700
@@ -82,23 +83,14 @@ function TarotPage() {
   const [lastRevealed, setLastRevealed] = useState(-1)
   const [cards, setCards] = useState([])
   const [selected, setSelected] = useState([])
-  function clickHandler(index) {
+  function clickHandler(event, index) {
+    event.stopPropagation()
     setLastRevealed(() => revealed)
     console.log(revealed)
     setRevealed((revealed) => (revealed === index ? -1 : index))
   }
   useEffect(() => setCards(() => altNaiveShuffle(tarot)), [])
-  function getCards() {
-    const selected = []
-    while (selected.length < 4) {
-      const randomElement =
-        tarot.cards[Math.floor(Math.random() * tarot.cards.length)]
-      if (!selected.find((t) => t.name_short === randomElement.name_short)) {
-        selected.push(randomElement)
-      }
-    }
-    return selected
-  }
+
   function altNaiveShuffle({ cards }) {
     let randomCard
     let tempX
@@ -110,19 +102,23 @@ function TarotPage() {
     }
     return cards
   }
-  function drawCard() {
+  function drawCard(ev) {
+    if (ev.target !== ev.currentTarget) {
+      return
+    }
     if (selected.length >= 4) {
       return
     }
     setSelected((selected) => [...selected, cards[selected.length]])
   }
+
   return (
     <>
       <Head>
         <title>tarot</title>
         <meta name="description" content="uh.." />
       </Head>
-      <Layout className={`grid place-items-center w-full`}>
+      <Layout className={`grid place-items-center`}>
         <section
           onClick={drawCard}
           className={`
@@ -134,15 +130,15 @@ function TarotPage() {
         grid
         grid-cols-1
         md:grid-cols-2
-        lg:grid-cols-4
+        xxl:grid-cols-4
         md:gap-8 lg:gap-16 gap-4
         duration-500 ease-in-out
         `}
         >
           <LayoutGroup>
             {selected.length === 0 && (
-              <div className="min-h-[350px] min-w-[325px] w-full flex-1">
-                Click to draw
+              <div className="grid place-items-center col-span-2">
+                <h1>Click to draw</h1>
               </div>
             )}
             {selected.length > 0 &&
